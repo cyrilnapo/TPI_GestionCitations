@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
+            $table->text('text');
             $table->string('character_name');
             $table->string('actor_name');
             $table->timestamps();
