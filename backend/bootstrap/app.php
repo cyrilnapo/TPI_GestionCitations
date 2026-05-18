@@ -41,14 +41,4 @@ return Application::configure(basePath: dirname(__DIR__))
 
             return null;
         });
-
-        $exceptions->render(function (Throwable $exception, Request $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Server error',
-                ], 500);
-            }
-
-            return null;
-        });
     })->create();
