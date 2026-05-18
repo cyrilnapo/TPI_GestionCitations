@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\QuoteController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,9 @@ Route::middleware('web')->group(function () {
 
 
     //--- Public routes
+
+    //search
+    Route::get('/search', [SearchController::class, 'index']);
 
     //auth
     Route::post('/register', [AuthController::class, 'register']);
@@ -34,7 +39,11 @@ Route::middleware('web')->group(function () {
     Route::middleware('auth:web')->group(function () {
         //auth
         Route::post('/logout', [AuthController::class, 'logout']);
-        Route::get('/user/me', [AuthController::class, 'me']);
+
+        //profile
+        Route::get('/profile', [ProfileController::class, 'show']);
+        Route::patch('/profile', [ProfileController::class, 'update']);
+        Route::patch('/profile/password', [ProfileController::class, 'updatePassword']);
 
         //movies
         Route::post('/movies', [MovieController::class, 'store']);

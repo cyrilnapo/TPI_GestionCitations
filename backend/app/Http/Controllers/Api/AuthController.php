@@ -31,7 +31,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return $this->jsonResponse('Registration successful', 201, [
-            'user' => $this->userPayload($user),
+            'user' => $this->cleanUserPayload($user),
         ]);
     }
 
@@ -41,7 +41,7 @@ class AuthController extends Controller
             $user = $request->user();
 
             return $this->jsonResponse('Already authenticated', 200, [
-                'user' => $this->userPayload($user),
+                'user' => $this->cleanUserPayload($user),
             ]);
         }
 
@@ -53,7 +53,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         return $this->jsonResponse('Login successful', 200, [
-            'user' => $this->userPayload($user),
+            'user' => $this->cleanUserPayload($user),
         ]);
     }
 
@@ -67,16 +67,7 @@ class AuthController extends Controller
         return $this->jsonResponse('Logout successful');
     }
 
-    public function me(Request $request): JsonResponse
-    {
-        $user = $request->user();
-
-        return $this->jsonResponse('User retrieved successfully', 200, [
-            'user' => $this->userPayload($user),
-        ]);
-    }
-
-    private function userPayload(User $user): array
+    private function cleanUserPayload(User $user): array
     {
         return [
             'id' => $user->id,
