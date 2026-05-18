@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $query = trim($request->query('q', ''));
+        $query = trim((string) $request->query('q', ''));
 
         if ($query === '') {
             return $this->jsonResponse('Search query is required', 422, [
