@@ -38,15 +38,22 @@ Route::middleware('web')->group(function () {
 
         //movies
         Route::post('/movies', [MovieController::class, 'store']);
-        Route::put('/movies/{movie}', [MovieController::class, 'update']);
         Route::patch('/movies/{movie}', [MovieController::class, 'update']);
         Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
 
         //quotes
         Route::post('/quotes', [QuoteController::class, 'store']);
-        Route::put('/quotes/{quote}', [QuoteController::class, 'update']);
         Route::patch('/quotes/{quote}', [QuoteController::class, 'update']);
         Route::delete('/quotes/{quote}', [QuoteController::class, 'destroy']);
+
+        //admin
+        Route::middleware('admin')->prefix('admin')->group(function () {
+            Route::patch('/movies/{movie}', [MovieController::class, 'adminUpdate']);
+            Route::delete('/movies/{movie}', [MovieController::class, 'adminDestroy']);
+
+            Route::patch('/quotes/{quote}', [QuoteController::class, 'adminUpdate']);
+            Route::delete('/quotes/{quote}', [QuoteController::class, 'adminDestroy']);
+        });
     });
 
 

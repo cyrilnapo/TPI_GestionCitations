@@ -64,4 +64,21 @@ class MovieController extends Controller
 
         return $this->jsonResponse('Movie deleted successfully');
     }
+
+    //admin
+    public function adminUpdate(UpdateMovieRequest $request, Movie $movie): JsonResponse
+    {
+        $movie->update($request->validated());
+
+        return $this->jsonResponse('Movie updated successfully', 200, [
+            'movie' => $movie->fresh(),
+        ]);
+    }
+
+    public function adminDestroy(Movie $movie): JsonResponse
+    {
+        $movie->delete();
+
+        return $this->jsonResponse('Movie deleted successfully');
+    }
 }

@@ -15,7 +15,7 @@ class QuoteController extends Controller
     {
         $quotes = Quote::query()->latest()->get();
 
-        return $this->jsonResponse('Quotes foud successfully', 200, [
+        return $this->jsonResponse('Quotes found successfully', 200, [
             'quotes' => $quotes,
         ]);
     }
@@ -60,6 +60,24 @@ class QuoteController extends Controller
             return $this->jsonResponse('Forbidden', 403);
         }
 
+        $quote->delete();
+
+        return $this->jsonResponse('Quote deleted successfully');
+    }
+
+
+    //admin
+    public function adminUpdate(UpdateQuoteRequest $request, Quote $quote): JsonResponse
+    {
+        $quote->update($request->validated());
+
+        return $this->jsonResponse('Quote updated successfully', 200, [
+            'quote' => $quote->fresh(),
+        ]);
+    }
+
+    public function adminDestroy(Quote $quote): JsonResponse
+    {
         $quote->delete();
 
         return $this->jsonResponse('Quote deleted successfully');
