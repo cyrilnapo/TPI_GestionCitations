@@ -1,0 +1,18 @@
+info:
+  name: search
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: http://localhost/api/search?q=godfather
+  params:
+    - name: q
+      value: godfather
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

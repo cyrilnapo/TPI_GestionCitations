@@ -1,0 +1,25 @@
+info:
+  name: admin forbidden for user
+  type: http
+  seq: 8
+
+http:
+  method: PATCH
+  url: http://localhost/api/admin/movies/1
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: X-CSRF-TOKEN
+      value: "{{csrfToken}}"
+  body:
+    type: json
+    data: |-
+      {
+        "title_fr": "Should fail for non-admin"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

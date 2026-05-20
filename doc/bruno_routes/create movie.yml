@@ -1,0 +1,28 @@
+info:
+  name: create movie
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: http://localhost/api/movies
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: X-CSRF-TOKEN
+      value: "{{csrfToken}}"
+  body:
+    type: json
+    data: |-
+      {
+        "title_fr": "Test Bruno FR",
+        "title_en": "Test Bruno EN",
+        "release_date": "2024-01-01",
+        "image_path": "https://example.com/poster.jpg"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

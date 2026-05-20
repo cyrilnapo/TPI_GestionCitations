@@ -1,0 +1,22 @@
+info:
+  name: get csrf token
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost/api/csrf-token
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.body && res.body.csrf_token) {
+          bru.setVar("csrfToken", res.body.csrf_token);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

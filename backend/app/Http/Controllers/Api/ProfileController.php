@@ -8,6 +8,7 @@ use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -35,7 +36,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $validated = $request->validated();
 
-        $user->password = $validated['password'];
+        $user->password = Hash::make($validated['password']);
         $user->save();
 
         return $this->jsonResponse('Password updated successfully');
