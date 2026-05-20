@@ -31,14 +31,4 @@ return Application::configure(basePath: dirname(__DIR__))
 
             return null;
         });
-
-        $exceptions->render(function (ModelNotFoundException $exception, Request $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Resource not found',
-                ], 404);
-            }
-
-            return null;
-        });
     })->create();
