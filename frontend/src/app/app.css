@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.page-content {
+  padding: 24px;
+  min-height: 100vh;
+  background: #f9fafb;
+}
