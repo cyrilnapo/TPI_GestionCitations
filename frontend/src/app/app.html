@@ -1,0 +1,53 @@
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <nav class="nav-list">
+        <a
+          class="nav-item"
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="material-icons">home</span>
+          <span class="nav-label">Accueil</span>
+        </a>
+        <a class="nav-item" routerLink="/movies" routerLinkActive="active-link">
+          <span class="material-icons">movie</span>
+          <span class="nav-label">Films</span>
+        </a>
+        <a class="nav-item" routerLink="/quotes" routerLinkActive="active-link">
+          <span class="material-icons">format_quote</span>
+          <span class="nav-label">Citations</span>
+        </a>
+        <a class="nav-item" routerLink="/my-content" routerLinkActive="active-link">
+          <span class="material-icons">folder</span>
+          <span class="nav-label">Mes contenus</span>
+        </a>
+        <a class="nav-item" routerLink="/profile" routerLinkActive="active-link">
+          <span class="material-icons">person</span>
+          <span class="nav-label">Profil</span>
+        </a>
+        <a class="nav-item" routerLink="/admin" routerLinkActive="active-link" *ngIf="isAdmin">
+          <span class="material-icons">admin_panel_settings</span>
+          <span class="nav-label">Administration</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-divider"></div>
+        <a class="nav-item" routerLink="/auth" *ngIf="isAuthenticated">
+          <span class="material-icons">logout</span>
+          <span class="nav-label">Déconnexion</span>
+        </a>
+        <a class="nav-item" routerLink="/auth" *ngIf="!isAuthenticated">
+          <span class="material-icons">login</span>
+          <span class="nav-label">Login / Signup</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="page-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
