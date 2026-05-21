@@ -1,11 +1,11 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [NgIf, AsyncPipe, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [AsyncPipe, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -24,7 +24,7 @@ export class App implements OnInit {
     this.authService.logout().subscribe({
       next: () => {
         this.router.navigate(['/auth']);
-      }
+      },
     });
   }
 }

@@ -14,30 +14,37 @@
           <span class="material-icons">format_quote</span>
           <span class="nav-label">Citations</span>
         </a>
-        <a class="nav-item" routerLink="/my-content" routerLinkActive="active-link" *ngIf="isAuthenticated$ | async">
+        @if (isAuthenticated$ | async) {
+        <a class="nav-item" routerLink="/my-content" routerLinkActive="active-link">
           <span class="material-icons">folder</span>
           <span class="nav-label">Mes contenus</span>
         </a>
-        <a class="nav-item" routerLink="/profile" routerLinkActive="active-link" *ngIf="isAuthenticated$ | async">
+        <a class="nav-item" routerLink="/profile" routerLinkActive="active-link">
           <span class="material-icons">person</span>
           <span class="nav-label">Profil</span>
         </a>
-        <a class="nav-item" routerLink="/admin" routerLinkActive="active-link" *ngIf="isAdmin$ | async">
+        }
+        @if (isAdmin$ | async) {
+        <a class="nav-item" routerLink="/admin" routerLinkActive="active-link">
           <span class="material-icons">admin_panel_settings</span>
           <span class="nav-label">Administration</span>
         </a>
+        }
       </nav>
 
       <div class="sidebar-footer">
         <div class="sidebar-divider"></div>
-        <button class="nav-item nav-button" type="button" (click)="logout()" *ngIf="isAuthenticated$ | async">
+        @if (isAuthenticated$ | async) {
+        <button class="nav-item nav-button" type="button" (click)="logout()">
           <span class="material-icons">logout</span>
           <span class="nav-label">Déconnexion</span>
         </button>
-        <a class="nav-item" routerLink="/auth" *ngIf="!(isAuthenticated$ | async)">
+        } @else {
+        <a class="nav-item" routerLink="/auth">
           <span class="material-icons">login</span>
           <span class="nav-label">Connexion / Inscription</span>
         </a>
+        }
       </div>
     </div>
   </aside>
