@@ -20,6 +20,18 @@ class QuoteController extends Controller
         ]);
     }
 
+    public function random(): JsonResponse
+    {
+        $quote = Quote::query()
+            ->with('movie')
+            ->inRandomOrder()
+            ->first();
+
+        return $this->jsonResponse('Random quote found successfully', 200, [
+            'quote' => $quote,
+        ]);
+    }
+
     public function show(Quote $quote): JsonResponse
     {
         return $this->jsonResponse('Quote found successfully', 200, [

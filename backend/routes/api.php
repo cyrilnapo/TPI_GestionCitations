@@ -33,6 +33,7 @@ Route::middleware('web')->group(function () {
 
     //quotes
     Route::get('/quotes', [QuoteController::class, 'index']);
+    Route::get('/quotes/random', [QuoteController::class, 'random']);
     Route::get('/quotes/{quote}', [QuoteController::class, 'show']);
 
     //--- Authenticated routes
