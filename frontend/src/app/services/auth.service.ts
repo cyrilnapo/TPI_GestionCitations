@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import { API_BASE_URL } from './api.config';
 
 export interface AuthUser {
   id: number;
@@ -13,11 +14,9 @@ interface AuthResponse {
   user?: AuthUser;
 }
 
-const DEFAULT_API_BASE_URL = 'http://localhost/api';
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly apiBaseUrl = DEFAULT_API_BASE_URL;
+  private readonly apiBaseUrl = API_BASE_URL;
   private readonly userSubject = new BehaviorSubject<AuthUser | null>(null);
   private csrfToken: string | null = null;
 
