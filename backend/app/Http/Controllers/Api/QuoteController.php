@@ -34,6 +34,8 @@ class QuoteController extends Controller
 
     public function show(Quote $quote): JsonResponse
     {
+        $quote->load('movie');
+
         return $this->jsonResponse('Quote found successfully', 200, [
             'quote' => $quote,
         ]);

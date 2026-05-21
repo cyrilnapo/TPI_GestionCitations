@@ -22,6 +22,8 @@ class MovieController extends Controller
 
     public function show(Movie $movie): JsonResponse
     {
+        $movie->load('quotes');
+
         return $this->jsonResponse('Movie found successfully', 200, [
             'movie' => $movie,
         ]);
