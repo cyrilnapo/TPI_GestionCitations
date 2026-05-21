@@ -1,1 +1,58 @@
-<div class="page"></div>
+<div class="home-page">
+
+  @if (randomQuote) {
+  <div class="quote-card">
+    <div class="quote-card-title">
+      <span class="material-icons">format_quote</span>
+      Citation du jour
+    </div>
+    <p class="quote-text">"{{ randomQuote.text }}"</p>
+    <div class="quote-info">
+      @if (randomQuote.character_name) {
+      <span>Personnage : {{ randomQuote.character_name }}</span>
+      }
+      @if (randomQuote.actor_name) {
+      <span> — {{ randomQuote.actor_name }}</span>
+      }
+      @if (randomQuote.movie) {
+      <span> | {{ randomQuote.movie.title_fr }}</span>
+      }
+    </div>
+  </div>
+  }
+
+  <div class="cta-buttons">
+    <a routerLink="/movies" class="btn-primary">Voir les films</a>
+    <a routerLink="/quotes" class="btn-outline">
+      <span class="material-icons">format_quote</span>
+      Voir les citations
+    </a>
+  </div>
+
+  <section class="recent-section">
+    <h2 class="section-title">Films récemment ajoutés</h2>
+
+    @if (loading) {
+    <div class="loading">Chargement...</div>
+    } @else {
+    <div class="movies-grid">
+      @for (movie of recentMovies; track movie.id) {
+      <a class="movie-card" [routerLink]="['/movies', movie.id]">
+        <div class="movie-image">
+          @if (movie.image_path) {
+          <img [src]="movie.image_path" />
+          } @else {
+          <span class="material-icons image-placeholder">movie</span>
+          }
+        </div>
+        <div class="movie-info">
+          <span class="movie-title-fr">{{ movie.title_fr }}</span>
+          <span class="movie-title-en">{{ movie.title_en }}</span>
+        </div>
+      </a>
+      }
+    </div>
+    }
+  </section>
+
+</div>
