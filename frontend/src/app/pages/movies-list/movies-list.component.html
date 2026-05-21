@@ -1,1 +1,35 @@
-<div class="page"></div>
+<div class="movies-page">
+  <div class="toolbar">
+    <input class="search-input" type="text" placeholder="Rechercher un film..." [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch()" />
+    @if (isAuthenticated$ | async) {
+    <a routerLink="/movies/add" class="btn-primary">+ Ajouter un film</a>
+    }
+  </div>
+
+  @if (loading) {
+  <div class="loading">Chargement...</div>
+  } @else if (filteredMovies.length === 0) {
+  <p class="empty">Aucun film trouvé.</p>
+  } @else {
+  <div class="movies-grid">
+    @for (movie of filteredMovies; track movie.id) {
+    <div class="movie-card">
+      <div class="movie-image">
+        @if (movie.image_path) {
+        <img [src]="movie.image_path" [alt]="movie.title_fr" />
+        } @else {
+        <span class="material-icons image-placeholder">movie</span>
+        }
+      </div>
+      <div class="movie-info">
+        <span class="movie-title-fr">{{ movie.title_fr }}</span>
+        <span class="movie-title-en">{{ movie.title_en }}</span>
+        <span class="movie-date">{{ movie.release_date }} (date de sortie)</span>
+        <a [routerLink]="['/movies', movie.id]" class="btn-detail">Voir les détails</a>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
