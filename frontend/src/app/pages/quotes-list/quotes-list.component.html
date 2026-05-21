@@ -1,1 +1,29 @@
-<div class="page"></div>
+<div class="quotes-page">
+  <div class="toolbar">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon">search</span>
+      <input class="search-input" type="text" placeholder="Rechercher une citation..." [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()" />
+    </div>
+    @if (isAuthenticated$ | async) {
+    <a routerLink="/quotes/add" class="btn-primary">+ Ajouter une citation</a>
+    }
+  </div>
+
+  @if (loading) {
+  <div class="loading">Chargement...</div>
+  } @else if (filteredQuotes.length === 0) {
+  <p class="empty">Aucune citation trouvée.</p>
+  } @else {
+  <div class="quotes-grid">
+    @for (quote of filteredQuotes; track quote.id) {
+    <div class="quote-card">
+      <p class="quote-text">"{{ quote.text }}"</p>
+      <p class="quote-meta">Personnage : {{ quote.character_name }}</p>
+      <p class="quote-meta">Acteur : {{ quote.actor_name }}</p>
+      <a [routerLink]="['/quotes', quote.id]" class="btn-detail">Voir détail</a>
+    </div>
+    }
+  </div>
+  }
+</div>

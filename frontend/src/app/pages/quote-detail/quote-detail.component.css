@@ -1,4 +1,124 @@
-.page {
-  font-size: 20px;
+.detail-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8px 0 32px;
+}
+
+.back-link {
+  display: inline-block;
+  color: #1976d2;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  color: #6b7280;
+  text-align: center;
+  padding: 48px;
+}
+
+.quote-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  padding: 36px 40px;
+}
+
+.quote-text {
+  font-size: 22px;
+  font-style: italic;
   font-weight: 500;
+  color: #111827;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.quote-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.quote-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.detail-label {
+  color: #374151;
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.detail-value {
+  color: #111827;
+}
+
+.detail-link {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.detail-link:hover {
+  text-decoration: underline;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1976d2;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-edit:hover {
+  background: #1565c0;
+}
+
+.btn-edit .material-icons,
+.btn-delete .material-icons {
+  font-size: 18px;
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #b91c1c;
 }

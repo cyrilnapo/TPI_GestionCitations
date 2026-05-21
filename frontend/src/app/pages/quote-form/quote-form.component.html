@@ -1,0 +1,51 @@
+<div class="form-page">
+  <a routerLink="/quotes" class="back-link">← Retour</a>
+  <h1 class="page-title">{{ isEditMode ? 'Modifier la citation' : 'Ajouter une citation' }}</h1>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Texte de la citation</mat-label>
+        <textarea matInput formControlName="text" rows="4"></textarea>
+        @if (form.controls.text.touched && form.controls.text.invalid) {
+        <mat-error>Texte requis</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Personnage</mat-label>
+        <input matInput formControlName="character_name" />
+        @if (form.controls.character_name.touched && form.controls.character_name.invalid) {
+        <mat-error>Personnage requis</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Acteur</mat-label>
+        <input matInput formControlName="actor_name" />
+        @if (form.controls.actor_name.touched && form.controls.actor_name.invalid) {
+        <mat-error>Acteur requis</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Film associé</mat-label>
+        <mat-select formControlName="movie_id">
+          @for (movie of movies; track movie.id) {
+          <mat-option [value]="movie.id">{{ movie.title_fr }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.movie_id.touched && form.controls.movie_id.invalid) {
+        <mat-error>Film requis</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="submitting">
+          Enregistrer
+        </button>
+        <a routerLink="/quotes" mat-button class="btn-cancel">Annuler</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,47 @@
-<div class="page"></div>
+<div class="detail-page">
+  <a routerLink="/quotes" class="back-link">← Retour aux citations</a>
+
+  @if (loading) {
+  <div class="loading">Chargement...</div>
+  } @else if (quote) {
+  <div class="quote-card">
+    <p class="quote-text">"{{ quote.text }}"</p>
+
+    <div class="quote-divider"></div>
+
+    <div class="quote-details">
+      <div class="detail-row">
+        <span class="detail-label">Personnage:</span>
+        <span class="detail-value">{{ quote.character_name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Acteur:</span>
+        <span class="detail-value">{{ quote.actor_name }}</span>
+      </div>
+      @if (quote.movie) {
+      <div class="detail-row">
+        <span class="detail-label">Film:</span>
+        <a [routerLink]="['/movies', quote.movie_id]" class="detail-link">
+          {{ quote.movie.title_fr }}
+        </a>
+      </div>
+      }
+    </div>
+
+    @if (currentUser$ | async; as user) {
+    @if (user.id === quote.user_id || user.role === 'admin') {
+    <div class="action-buttons">
+      <a [routerLink]="['/quotes', quote.id, 'edit']" class="btn-edit">
+        <span class="material-icons">edit</span>
+        Modifier
+      </a>
+      <button class="btn-delete" (click)="delete()">
+        <span class="material-icons">delete</span>
+        Supprimer
+      </button>
+    </div>
+    }
+    }
+  </div>
+  }
+</div>
