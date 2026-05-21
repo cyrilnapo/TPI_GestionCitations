@@ -1,1 +1,58 @@
-<div class="page"></div>
+<div class="detail-page">
+  <a routerLink="/movies" class="back-link">← Retour aux films</a>
+
+  @if (loading) {
+  <div class="loading">Chargement...</div>
+  } @else if (movie) {
+
+    <div class="movie-card">
+    <div class="movie-image">
+      @if (movie.image_path) {
+      <img [src]="movie.image_path" />
+      } @else {
+      <span class="material-icons image-placeholder">movie</span>
+      }
+    </div>
+    <div class="movie-meta">
+      <h1 class="title-fr">{{ movie.title_fr }}</h1>
+      <p class="title-en">{{ movie.title_en }}</p>
+      <p class="release-date">Sortie : {{ movie.release_date }}</p>
+
+      @if (currentUser$ | async; as user) {
+      @if (user.id === movie.user_id || user.role === 'admin') {
+      <div class="action-buttons">
+        <a [routerLink]="['/movies', movie.id, 'edit']" class="btn-edit">Modifier</a>
+        <button class="btn-delete" (click)="delete()">Supprimer</button>
+      </div>
+      }
+      }
+    </div>
+  </div>
+
+  <div class="quotes-section">
+    <div class="quotes-header">
+      <h2 class="quotes-title">Citations ({{ movie.quotes?.length ?? 0 }})</h2>
+      @if (isAuthenticated$ | async) {
+      <a [routerLink]="['/quotes/add']" [queryParams]="{ movie_id: movie.id }" class="btn-primary">
+        + Ajouter une citation
+      </a>
+      }
+    </div>
+
+    @if (!movie.quotes || movie.quotes.length === 0) {
+    <p class="empty">Aucune citation pour ce film.</p>
+    } @else {
+    <div class="quotes-grid">
+      @for (quote of movie.quotes; track quote.id) {
+      <div class="quote-card">
+        <p class="quote-text">"{{ quote.text }}"</p>
+        <p class="quote-meta">Personnage : {{ quote.character_name }}</p>
+        <p class="quote-meta">Acteur : {{ quote.actor_name }}</p>
+        <a [routerLink]="['/quotes', quote.id]" class="btn-detail">Voir détail</a>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  }
+</div>

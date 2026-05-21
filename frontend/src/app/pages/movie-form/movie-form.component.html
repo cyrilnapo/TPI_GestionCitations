@@ -1,0 +1,44 @@
+<div class="form-page">
+  <a routerLink="/movies" class="back-link">← Retour</a>
+  <h1 class="page-title">{{ isEditMode ? 'Modifier le film' : 'Ajouter un film' }}</h1>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre français</mat-label>
+        <input matInput formControlName="title_fr" />
+        @if (form.controls.title_fr.touched && form.controls.title_fr.invalid) {
+        <mat-error>Titre français requis</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre anglais</mat-label>
+        <input matInput formControlName="title_en" />
+        @if (form.controls.title_en.touched && form.controls.title_en.invalid) {
+        <mat-error>Titre anglais requis</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Date de sortie</mat-label>
+        <input matInput type="date" formControlName="release_date" />
+        @if (form.controls.release_date.touched && form.controls.release_date.invalid) {
+        <mat-error>Date de sortie requise</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>URL de l'image</mat-label>
+        <input matInput formControlName="image_path" placeholder="https://example.com/image" />
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="submitting">
+          Enregistrer
+        </button>
+        <a routerLink="/movies" mat-button class="btn-cancel">Annuler</a>
+      </div>
+    </form>
+  </div>
+</div>
