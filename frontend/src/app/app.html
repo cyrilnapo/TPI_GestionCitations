@@ -2,12 +2,7 @@
   <aside class="sidebar">
     <div class="sidebar-content">
       <nav class="nav-list">
-        <a
-          class="nav-item"
-          routerLink="/"
-          routerLinkActive="active-link"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+        <a class="nav-item" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
           <span class="material-icons">home</span>
           <span class="nav-label">Accueil</span>
         </a>
@@ -19,15 +14,15 @@
           <span class="material-icons">format_quote</span>
           <span class="nav-label">Citations</span>
         </a>
-        <a class="nav-item" routerLink="/my-content" routerLinkActive="active-link">
+        <a class="nav-item" routerLink="/my-content" routerLinkActive="active-link" *ngIf="isAuthenticated$ | async">
           <span class="material-icons">folder</span>
           <span class="nav-label">Mes contenus</span>
         </a>
-        <a class="nav-item" routerLink="/profile" routerLinkActive="active-link">
+        <a class="nav-item" routerLink="/profile" routerLinkActive="active-link" *ngIf="isAuthenticated$ | async">
           <span class="material-icons">person</span>
           <span class="nav-label">Profil</span>
         </a>
-        <a class="nav-item" routerLink="/admin" routerLinkActive="active-link" *ngIf="isAdmin">
+        <a class="nav-item" routerLink="/admin" routerLinkActive="active-link" *ngIf="isAdmin$ | async">
           <span class="material-icons">admin_panel_settings</span>
           <span class="nav-label">Administration</span>
         </a>
@@ -35,13 +30,13 @@
 
       <div class="sidebar-footer">
         <div class="sidebar-divider"></div>
-        <a class="nav-item" routerLink="/auth" *ngIf="isAuthenticated">
+        <button class="nav-item nav-button" type="button" (click)="logout()" *ngIf="isAuthenticated$ | async">
           <span class="material-icons">logout</span>
           <span class="nav-label">Déconnexion</span>
-        </a>
-        <a class="nav-item" routerLink="/auth" *ngIf="!isAuthenticated">
+        </button>
+        <a class="nav-item" routerLink="/auth" *ngIf="!(isAuthenticated$ | async)">
           <span class="material-icons">login</span>
-          <span class="nav-label">Login / Signup</span>
+          <span class="nav-label">Connexion / Inscription</span>
         </a>
       </div>
     </div>

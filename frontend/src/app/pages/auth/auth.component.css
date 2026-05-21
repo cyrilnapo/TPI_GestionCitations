@@ -1,4 +1,80 @@
-.page {
-  font-size: 20px;
+.auth-page {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.auth-card {
+  width: 460px;
+  max-width: 100%;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+  background: #ffffff;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
   font-weight: 500;
+  color: #111827;
+  margin-bottom: 24px;
+}
+
+.title-icon {
+  color: #2563eb;
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.submit-button {
+  width: 100%;
+  font-weight: 500;
+}
+
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.link-button {
+  border: none;
+  background: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0 0 6px;
+}
+
+:host ::ng-deep .auth-field .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 12px;
+  --mdc-outlined-text-field-outline-color: #d1d5db;
+  --mdc-outlined-text-field-hover-outline-color: #9ca3af;
+  --mdc-outlined-text-field-focus-outline-color: #2563eb;
+  --mdc-outlined-text-field-container-height: 56px;
+}
+
+:host ::ng-deep .auth-field .mdc-floating-label {
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+:host ::ng-deep .submit-button.mdc-button {
+  --mdc-filled-button-container-color: #2563eb;
+  --mdc-filled-button-label-text-color: #ffffff;
+  height: 48px;
+  border-radius: 12px;
 }

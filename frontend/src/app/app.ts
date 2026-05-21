@@ -1,19 +1,30 @@
-import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    NgIf,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive
-  ],
+  imports: [NgIf, AsyncPipe, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  isAuthenticated = true;
-  isAdmin = false;
+export class App implements OnInit {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  readonly isAuthenticated$ = this.authService.isAuthenticated$;
+  readonly isAdmin$ = this.authService.isAdmin$;
+
+  ngOnInit(): void {
+    this.authService.refreshProfile().subscribe();
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth']);
+      }
+    });
+  }
 }

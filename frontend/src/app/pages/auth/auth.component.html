@@ -1,1 +1,78 @@
-<div class="page"></div>
+<div class="auth-page">
+    <mat-card class="auth-card">
+        <div class="title">
+            <mat-icon class="title-icon">{{ isLoginMode ? 'login' : 'person_add' }}</mat-icon>
+            <span>{{ isLoginMode ? 'Connexion' : 'Inscription' }}</span>
+        </div>
+
+        <form class="auth-form" *ngIf="isLoginMode" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput formControlName="username" autocomplete="username" />
+                <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
+                    Nom d'utilisateur requis
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" formControlName="password" autocomplete="current-password" />
+                <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                    Mot de passe requis
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="submit-button" type="submit" [disabled]="loginForm.invalid">
+                Se connecter
+            </button>
+        </form>
+
+        <form class="auth-form" *ngIf="!isLoginMode" [formGroup]="signupForm" (ngSubmit)="submitSignup()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput formControlName="username" autocomplete="username" />
+                <mat-error *ngIf="signupForm.controls.username.touched && signupForm.controls.username.invalid">
+                    Nom d'utilisateur requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" formControlName="password" autocomplete="new-password" />
+                <mat-error *ngIf="signupForm.controls.password.touched && signupForm.controls.password.invalid">
+                    Mot de passe requis (min 8 caractères)
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmer le mot de passe</mat-label>
+                <input matInput type="password" formControlName="confirmPassword" autocomplete="new-password" />
+                <mat-error *ngIf="
+            signupForm.controls.confirmPassword.touched &&
+            signupForm.controls.confirmPassword.hasError('required')
+">
+                    Confirmation requise
+                </mat-error>
+                <mat-error *ngIf="
+            signupForm.controls.confirmPassword.touched && signupForm.hasError('passwordMismatch')
+          ">
+                    Les mots de passe ne correspondent pas
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="submit-button" type="submit" [disabled]="signupForm.invalid">
+                S'inscrire
+            </button>
+        </form>
+
+        <div class="form-footer" *ngIf="isLoginMode">
+            <span>Pas encore de compte ?</span>
+            <button type="button" class="link-button" (click)="switchMode('signup')">S'inscrire</button>
+        </div>
+
+        <div class="form-footer" *ngIf="!isLoginMode">
+            <span>Déjà un compte ?</span>
+            <button type="button" class="link-button" (click)="switchMode('login')">Se connecter</button>
+        </div>
+    </mat-card>
+</div>
